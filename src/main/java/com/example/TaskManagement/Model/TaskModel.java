@@ -1,6 +1,8 @@
 package com.example.TaskManagement.Model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,11 +13,14 @@ public class TaskModel {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String title,description;
-	private String status;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	
 	public TaskModel() {
     }
 	
-	public TaskModel(Long id,String title,String description,String status) {
+	public TaskModel(Long id,String title,String description,Status status) {
 		this.id=id;
 		this.title=title;
 		this.description=description;
@@ -39,10 +44,10 @@ public class TaskModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 

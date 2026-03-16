@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.TaskManagement.Model.Status;
 import com.example.TaskManagement.Model.TaskModel;
 import com.example.TaskManagement.Repository.TaskRepository;
 
@@ -42,5 +43,19 @@ public class TaskServices {
 	//DeleteTask
 	public void DeleteByid(Long id) {
 		repo.deleteById(id);
+	}
+	
+	//Update Status by id
+	public TaskModel statusById(Long id,TaskModel task) {
+		TaskModel existing=repo.findById(id).orElse(null);
+		if(existing!=null) {
+			existing.setStatus(task.getStatus());
+			return repo.save(existing);
+		}
+		return null;
+	}
+	//find By status
+	public List<TaskModel> findByStatus(Status status) {
+		return repo.findByStatus(status);
 	}
 }

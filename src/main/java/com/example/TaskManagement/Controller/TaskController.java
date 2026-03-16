@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TaskManagement.Model.Status;
 import com.example.TaskManagement.Model.TaskModel;
 import com.example.TaskManagement.Services.TaskServices;
 
@@ -44,5 +45,15 @@ public class TaskController {
 	@DeleteMapping("/delete/{id}")
 	public void DeleteTask(@PathVariable Long id) {
 		ser.DeleteByid(id);
+	}
+	
+	@PutMapping("/status/{id}")
+	public TaskModel StatusById(@PathVariable Long id,@RequestBody TaskModel Task) {
+		return ser.statusById(id, Task);
+	}
+	
+	@GetMapping("/status/{status}")
+	public List<TaskModel> getTasksByStatus(@PathVariable Status status) {
+	    return ser.findByStatus(status);
 	}
 }
